@@ -1,19 +1,12 @@
 import axios from 'axios';
 
+const instance = axios.create({
+  baseURL: 'https://pixabay.com/api',
+}) 
 const IMAGES_PER_PAGE = 12;
 const PIXABAY_KEY = '22740436-05bbd607dbbc32bdc3528cde5';
-const PIXABAY_URL = 'https://pixabay.com/api';
+// const PIXABAY_URL = 'https://pixabay.com/api';
 
 export const search = (q, page) => {
-  return axios
-    .get(PIXABAY_URL, {
-      params: {
-        q,
-        page,
-        per_page: IMAGES_PER_PAGE,
-        key:  PIXABAY_KEY,
-        image_type: 'photo',
-        orientation: 'horizontal'
-      }
-    })
+  return instance.get(`?q=${q}&page=${page}&key=${PIXABAY_KEY}&image_type=photo&orientation=horizontal&per_page=12`)  
 }
